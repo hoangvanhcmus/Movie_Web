@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bootstrap and jquery</title>
+	   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+</head>
+<body class="bg-dark">
+<header class="container">
+	<div id="demo" class="carousel slide" data-ride="carousel">
+
+	  <!-- Indicators -->
+	  <ul class="carousel-indicators">
+	    <li data-target="#demo" data-slide-to="0" class="active"></li>
+	    <li data-target="#demo" data-slide-to="1"></li>
+	    <li data-target="#demo" data-slide-to="2"></li>
+	  </ul>
+	  
+	  <!-- The slideshow -->
+	  <div class="carousel-inner">
+	    <div class="carousel-item active">
+	      <img src="img/slide1.png" alt="film" width="1100" height="500">
+	      <div class="carousel-caption">
+		    <h3>Baby Driver</h3>
+		    <p>Action film written and directed by Edgar Wright</p>
+		  </div>
+	    </div>
+	    <div class="carousel-item">
+	      <img src="img/slide2.png" alt="film" width="1100" height="500">
+	      <div class="carousel-caption">
+		    <h3>Batman v Superman: Dawn of Justice</h3>
+		    <p>American superhero film featuring the DC Comics characters Batman and Superman</p>
+		  </div>
+	    </div>
+	    <div class="carousel-item">
+	      <img src="img/slide3.png" alt="film" width="1100" height="500">
+	      <div class="carousel-caption">
+		    <h3>Harry Potter and The Prisoner of Azkaban</h3>
+		    <p>Fantasy film directed by Alfonso Cuarón</p>
+	  	  </div>
+	    </div>
+	  </div>
+	  
+	  <!-- Left and right controls -->
+	  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+	    <span class="carousel-control-prev-icon"></span>
+	  </a>
+	  <a class="carousel-control-next" href="#demo" data-slide="next">
+	    <span class="carousel-control-next-icon"></span>
+	  </a>
+
+	</div>
+</header>
+
+<main>
+
+<div class="container">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex justify-content-between mt-3">
+	  <ul class="navbar-nav">
+	    <li class="nav-item active mr-2">
+	      <a class="nav-link" href="#">Home</a>
+	    </li>
+	    <li class="nav-item mr-2">
+	      <a class="nav-link" href="#films">Films</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#footer">Contacts</a>
+	    </li>
+	  </ul>
+	  <form class="form-inline" action="/action_page.php">
+	    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+	    <button class="btn btn-success" type="submit">Search</button>
+	  </form>
+	</nav>
+	<hr class="mx-auto bg-secondary" style="max-width: 1000px;width: 100%;">
+</div>
+
+<section id="films">
+	<div class="container">
+		<div class="row justify-content-between mt-5">
+			<div class="card bg-dark" style="width:256px">
+				<img class="card-img-top rounded" src="img/film1.png" alt="film">
+			  <div class="card-body text-center">
+			    <h4 class="card-title text-white">Riverdale</h4>
+			    <p class="card-text text-white">American teen drama television series based on the characters of Archie Comics</p>
+			    <a href="#" class="btn btn-success">Watch</a>
+			  </div>
+			</div>
+			<div class="card bg-dark" style="width:256px">
+				<img class="card-img-top rounded" src="img/film2.png" alt="film">
+			  <div class="card-body text-center">
+			    <h4 class="card-title text-white">Avangers</h4>
+			    <p class="card-text text-white">American superhero film based on the Marvel Comics superhero team the Avengers</p>
+			    <a href="#" class="btn btn-success">Watch</a>
+			  </div>
+			</div>
+			<div class="card bg-dark" style="width:256px">
+				<img class="card-img-top rounded" src="img/film3.png" alt="film">
+			  <div class="card-body text-center">
+			    <h4 class="card-title text-white">Stranger Things</h4>
+			    <p class="card-text text-white">American science fiction horror web television series</p>
+			    <a href="#" class="btn btn-success">Watch</a>
+			  </div>
+			</div>
+			<div class="card bg-dark" style="width:256px">
+				<img class="card-img-top rounded" src="img/film4.png" alt="film">
+			  <div class="card-body text-center">
+			    <h4 class="card-title text-white">Detective Pikachu</h4>
+			    <p class="card-text text-white">Urban fantasy mystery film directed by Rob Letterman</p>
+			    <a href="#" class="btn btn-success">Watch</a>
+			  </div>
+			</div>
+		</div>
+
+		<div class="row justify-content-between mt-5">
+			<div class="card bg-dark" style="width:256px">
+				<img class="card-img-top rounded" src="img/film5.png" alt="film">
+			  <div class="card-body text-center">
+			    <h4 class="card-title text-white">Game of Thrones</h4>
+			    <p class="card-text text-white">American fantasy drama television series created by David Benioff and D. B. Weiss for HBO</p>
+			    <a href="#" class="btn btn-success">Watch</a>
+			  </div>
+			</div>
+			<div class="card bg-dark" style="width:256px">
+				<img class="card-img-top rounded" src="img/film6.png" alt="film">
+			  <div class="card-body text-center">
+			    <h4 class="card-title text-white">Star Wars</h4>
+			    <p class="card-text text-white">American epic space-opera media franchise created by George Lucas</p>
+			    <a href="#" class="btn btn-success">Watch</a>
+			  </div>
+			</div>
+			<div class="card bg-dark" style="width:256px">
+				<img class="card-img-top rounded" src="img/film7.png" alt="film">
+			  <div class="card-body text-center">
+			    <h4 class="card-title text-white">The Dark Knight</h4>
+			    <p class="card-text text-white">Superhero film directed, co-produced, and co-written by Christopher Nolan</p>
+			    <a href="#" class="btn btn-success">Watch</a>
+			  </div>
+			</div>
+			<div class="card bg-dark" style="width:256px">
+				<img class="card-img-top rounded" src="img/film8.png" alt="film">
+			  <div class="card-body text-center">
+			    <h4 class="card-title text-white">Deadpool 2</h4>
+			    <p class="card-text text-white">American superhero film based on the Marvel Comics character Deadpool</p>
+			    <a href="#" class="btn btn-success">Watch</a>
+			  </div>
+			</div>
+		</div>
+	</div>
+</section>
+</main>
+<footer id="footer">
+	<div class="container">
+		<hr class="mx-auto bg-secondary mt-5" style="max-width: 1000px;width: 100%;">
+		<div class="row justify-content-between bg-dark my-5">
+			<a href=""><img src="img/f-icon1.png"></a>
+			<a href=""><img src="img/f-icon2.png"></a>
+			<a href=""><img src="img/f-icon3.png"></a>
+			<a href=""><img src="img/f-icon4.png"></a>
+			<a href=""><img src="img/f-icon5.png"></a>
+			<a href=""><img src="img/f-icon6.png"></a>
+			<a href=""><img src="img/f-icon7.png"></a>
+			<a href=""><img src="img/f-icon8.png"></a>
+			<a href=""><img src="img/f-icon9.png"></a>
+			<a href=""><img src="img/f-icon10.png"></a>
+			<a href=""><img src="img/f-icon11.png"></a>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
