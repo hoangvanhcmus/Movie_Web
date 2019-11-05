@@ -144,9 +144,8 @@
                 </link>
             </meta>
         </meta>
-        <script type="./temp.js"></script>
     </head>
-    <body class="bg-dark">
+    <body class="bg-dark" onload="LoadPage()">
         <header class="container">
             <div class="carousel slide" data-ride="carousel" id="demo">
                 <!-- Indicators -->
@@ -209,11 +208,6 @@
             </div>
         </header>
         <main>
-            <nav class="navbar navbar-light bg-light border"></nav>
-            <div class="container">
-                <div class="row" id="ItemMovie"></div>
-            </div>
-
             <div class="container-fluid">
                 <div class="row-fluid btnContainer">
                     <div class="inline" id="searchBtnContainer" s="">
@@ -251,32 +245,8 @@
                 </div>
             </div>
             <script>
-                async function listMovie(url, pages) {
-  const response = await fetch(url + pages);
-  const ls_Movie = await response.json();
-  console.log(ls_Movie);
-  var path = "https://image.tmdb.org/t/p/w200";
-  $("#itemMovie").empty();
-  for (const item of ls_Movie.results) {
-    $("#itemMovie").append(`
-            <div class="col-md-3 hei_item" >
-              <div class="card mb-4 shadow-sm">
-                <p class = "tag">${"Rate: " + item.vote_average}</p>
-                <img class="img_hei" src="${path + item.poster_path}"/>
-                <div class="card-body">
-                  <p class="card-text">${item.name}</p>
-                  <p class="date_item">${item.first_air_date}</p>
-                  <button class="btn_item" onclick = "detailMovie(${
-                    item.id
-                  })">Chi tiết</button>
-                </div>
-              </div>
-            </div>
-            
-      `);
-  }
-}
-                $(document).ready( function(){
+
+                function LoadPage(){
                     var baseUrl = 'http://api.themoviedb.org/3/',
                                 trendingDay='trending/movie/day',
                                 key = '&api_key=1b28abc5f4b5a2e02a3472c81a774c76';
@@ -301,7 +271,7 @@
 
 
 
-                });
+                };
 
                 
                 $(document).ready(function() {
@@ -420,18 +390,19 @@
             });
             $.ajax({
                 type: 'GET',
-                url: baseUrl + person + "/" + selectedMovie_id + "/" + credits + key,
+                url: baseUrl + "/search/person" + input + key,
                 async: false,
                 jsonpCallback: 'test',
                 contentType: 'application/json',
                 dataType: 'jsonp',
                 success: function(json) {
-                    $(".chosenTitle").append("<div class=" + "movieTitle_detailView" + " " + "id=" + selectedMovie_id + ">" + "<span>" + selectedMovieTitle + "</span>" + "</div>");
                     for (j = 0; j < json.cast.length; j++) {
-                        actorNames = json.cast[j].name;
-                        actor_id = json.cast[j].id;
-                        actorImgItem = json.cast[j].profile_path;
-                        $(".movieDetail_actors").append("<div class=" + "actorsFeatured" + " " + "id=" + actor_id + ">" + "<img " + "class=" + "actorImg" + " " + "src=" + "https://image.tmdb.org/t/p/w185_and_h278_bestv2" + actorImgItem + " />" + "<br>" + actorNames + " " + "</div>");
+                        titleItems = json.known_for[i].title;
+                        movie_id = json.known_for[i].id;
+                        posterItems = json.known_for[i].poster_path;
+                        vote=json.results[i].vote_average;
+
+                        $(".movieCard").append("<div class=" + "movieTitle" + " " + "id=" + movie_id + ">" + "<img " + "class=" + "posterImg" + " " + "src=" + "https://image.tmdb.org/t/p/w185_and_h278_bestv2" + posterItems + " />" + "<br>" + "<div class=" + "searchFilmTitles" + ">" +titleItems + "</div>" + "<div class="+"searchFilmRate"+">"+"Rate: "+vote+"</div>" + "</br>");
                     }
                 },
                 error: function(e) {
