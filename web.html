@@ -35,14 +35,8 @@
         margin: 10px;
     }
     
-    #noMatch {
-        text-align: center;
-        color: red;
-        display: none;
-    }
-    
     .searchFilmTitles {
-        height: 60px;
+        height: 50px;
         padding: 10px;
     }
     
@@ -51,15 +45,35 @@
     }
     
     .movieTitle {
+        color: blue;
         text-align: center;
         padding: 20px 0;
+        margin: 10px;
+        border: 1px solid grey;
+        width: 300px;
+        height: 380px;
+        float: left;
+    }
+    
+    .vote{
+        color: white;
+		text-align: center;
+        margin: 10px;
+        border: 1px;
+        width: 217px;
+        height: 368px;
+        float: left;
+    }
+
+    .timeFilm{
+        text-align: center;
         margin: 10px;
         border: 1px solid grey;
         width: 217px;
         height: 368px;
         float: left;
     }
-    
+
     #showTitle {
         padding: 12px;
     }
@@ -120,8 +134,9 @@
         height: 50px;
         padding: 10px;
     }
+    div.inline { float:right; }
+	.clearBoth { clear:right; }
     </style>
-  </style>
     
 </head>
 <body class="bg-dark">
@@ -177,14 +192,15 @@
 
 <div class="container-fluid">
         <div class="row-fluid btnContainer">
-            <div id="searchBtnContainer" class="col-xs-6">
-                <input id="movie" type="text" name="searchMovies" placeholder="Search for a movie" />
-                <button id="searchBtn">Search</button>
+            <div class="inline" s id="searchBtnContainer" >
+                <input class="form-control mr-sm-2" id="movie" type="text" name="searchMovies" placeholder="Search for a movie" />
+                <br>
+                <button class="btn btn-success" id="searchBtn">Search</button>
+                <input class="btn btn-success" id="refreshBtn" type="button" value="Refresh">
             </div>
-            <div id="refreshBtnContainer" class="col-xs-6">
-                <input id="refreshBtn" type="button" value="Refresh Page & Start Again">
-            </div>
+           
         </div>
+
     </div>
     <div id="noMatch"></div>
     <div class="container-fluid" id="showSearchResult">
@@ -220,9 +236,11 @@
             ampQuery = '&query=',
             search = 'search/',
             sort_by_popularity = '&sort_by=popularity.desc',
+            trendingDay='trending/movie/day',
             movieQuery = 'movie?',
             movie = 'movie',
-            person = 'person',
+
+            //person = 'person',
             person_id,
             movie_credits = 'movie_credits?',
             input,
@@ -255,7 +273,25 @@
         // https://api.themoviedb.org/3/discover/movie?api_key=f8c4016803faf5e7f424abe98a04b8d9&query=Jack+Reacher&sort_by=popularity.desc
         //Search button to show results
 
+        $(document).ready(function() {
+            $.ajax({
+                type:'GETSSS',
+                url :baseUrl + trendingDay + key,
+                async:false,
+                jsonpCallbacks:'test',
+                contentType: 'application/json',
+                dataType:'json',
+                success:function(json){
+                    for (i = 0; i < json.results.length; i++) {
+                        titleItems = json.results[i].title;
+                        movie_id = json.results[i].id;
+                        posterItems = json.results[i].poster_path;
+                        vote=json.results[i].vote_average;
 
+                        $(".movieCard").append("<div class=" + "movieTitle" + " " + "id=" + movie_id + ">" + "<img " + "class=" + "posterImg" + " " + "src=" + "https://image.tmdb.org/t/p/w185_and_h278_bestv2" + posterItems + " />" + "<br>" + "<div class=" + "searchFilmTitles" + ">" +titleItems + "</div>" + "<div class="+"searchFilmRate"+">"+"Rate: "+vote+"</div>" + "</br>");
+                }
+            })
+        });
 
 
 
@@ -274,7 +310,9 @@
                         titleItems = json.results[i].title;
                         movie_id = json.results[i].id;
                         posterItems = json.results[i].poster_path;
-                        $(".movieCard").append("<div class=" + "movieTitle" + " " + "id=" + movie_id + ">" + "<img " + "class=" + "posterImg" + " " + "src=" + "https://image.tmdb.org/t/p/w185_and_h278_bestv2" + posterItems + " />" + "<br>" + "<div class=" + "searchFilmTitles" + ">" + titleItems + "</div>" + "</div>" + "</br>");
+                        vote=json.results[i].vote_average;
+
+                        $(".movieCard").append("<div class=" + "movieTitle" + " " + "id=" + movie_id + ">" + "<img " + "class=" + "posterImg" + " " + "src=" + "https://image.tmdb.org/t/p/w185_and_h278_bestv2" + posterItems + " />" + "<br>" + "<div class=" + "searchFilmTitles" + ">" +titleItems + "</div>" + "<div class="+"searchFilmRate"+">"+"Rate: "+vote+"</div>" + "</br>");
                         
 
                     }
@@ -283,6 +321,28 @@
                 error: function(e) {
                     console.log(e.message);
                 }
+            });
+            $.ajax({
+                type: 'GET',
+                url: baseUrl + person + "/" + selectedMovie_id + "/" + credits + key,
+                async: false,
+                jsonpCallback: 'test',
+                contentType: 'application/json',
+                dataType: 'jsonp',
+                success: function(json) {
+                    $(".chosenTitle").append("<div class=" + "movieTitle_detailView" + " " + "id=" + selectedMovie_id + ">" + "<span>" + selectedMovieTitle + "</span>" + "</div>");
+                    for (j = 0; j < json.cast.length; j++) {
+                        actorNames = json.cast[j].name;
+                        actor_id = json.cast[j].id;
+                        actorImgItem = json.cast[j].profile_path;
+                        $(".movieDetail_actors").append("<div class=" + "actorsFeatured" + " " + "id=" + actor_id + ">" + "<img " + "class=" + "actorImg" + " " + "src=" + "https://image.tmdb.org/t/p/w185_and_h278_bestv2" + actorImgItem + " />" + "<br>" + actorNames + " " + "</div>");
+                    }
+                },
+                error: function(e) {
+                    console.log(e.message);
+
+                }
+
             });
             // Shows warning message when there is no result
             setTimeout(function() {
@@ -331,8 +391,12 @@
                 },
                 error: function(e) {
                     console.log(e.message);
+
                 }
+
             });
+
+
         });
         // 3) Show Top 10 movies by chosen actor///
         // Ex: URL to show popular movies by selected actor
